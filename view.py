@@ -17,7 +17,7 @@ if connection.is_connected():
 
     # Perform database operations here
 
-    sql = "SELECT * FROM nft_events"
+    sql = "SELECT * FROM nft_events ORDER BY timestamp ASC LIMIT 100"
     cursor.execute(sql)
 
     # Fetch all rows
@@ -25,6 +25,14 @@ if connection.is_connected():
 
     for row in rows:
         print(row)
+
+    sql = "SELECT COUNT(*) FROM nft_events"
+    cursor.execute(sql)
+
+    # Fetch all rows
+    count = cursor.fetchone()[0]
+
+    print("COUNT; ", count)
 
     cursor.close()
     # Close the connection when done
